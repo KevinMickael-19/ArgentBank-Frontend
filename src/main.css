@@ -6,6 +6,12 @@ html {
   color: #2c3e50;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 body {
   margin: 0;
   display: flex;
