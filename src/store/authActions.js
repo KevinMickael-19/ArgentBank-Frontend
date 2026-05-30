@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   loginUser as loginUserApi,
   getUserProfile as getUserProfileApi,
+  updateUserProfile as updateUserProfileApi,
 } from "../services/api";
 
 export const loginUser = createAsyncThunk(
@@ -14,3 +15,10 @@ export const loginUser = createAsyncThunk(
 export const getUserProfile = createAsyncThunk("auth/profile", async (token) => {
   return await getUserProfileApi(token);
 });
+
+export const updateUsername = createAsyncThunk(
+  "auth/updateUsername" ,
+  async ({token, userName}) => {
+    return await updateUserProfileApi(token, userName)
+  }
+)
