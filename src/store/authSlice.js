@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginUser } from "./authActions";
+import { loginUser, getUserProfile } from "./authActions";
 
 const authSlice = createSlice({
   name: "auth",
@@ -24,6 +24,10 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+      })
+
+      .addCase(getUserProfile.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
   },
 });
