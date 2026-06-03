@@ -16,8 +16,8 @@ export const getUserProfile = createAsyncThunk("auth/profile", async (token) => 
   return await getUserProfileApi(token);
 });
 
-export const updateUsername = createAsyncThunk(
-  "auth/updateUsername" ,
+export const updateUserName = createAsyncThunk(
+  "auth/updateUserName" ,
   async ({token, userName}) => {
     return await updateUserProfileApi(token, userName)
   }

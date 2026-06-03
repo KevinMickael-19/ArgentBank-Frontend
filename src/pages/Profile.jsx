@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Account from "../components/Account";
-import { getUserProfile } from "../store/authActions";
+import { getUserProfile, updateUserName } from "../store/authActions";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -9,6 +9,15 @@ function Profile() {
   const user = useSelector((state) => state.auth.user);
   const [isEditing, setIsEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
+
+  const handleSave = async() => {
+    try {
+      await dispatch(updateUserName({userName:newUserName, token})).unwrap()
+      setIsEditing(false)
+    } catch {
+      //Gestion erreur Redux
+    }
+  }
 
   useEffect(() => {
     dispatch(getUserProfile(token));
@@ -25,7 +34,7 @@ function Profile() {
               onChange={(e) => setNewUserName(e.target.value)}
             />
             <button onClick={() => setIsEditing(false)}>Cancel</button>
-            <button>Save</button>
+            <button onClick={handleSave}>Save</button>
           </>
         ) : (
           <>
