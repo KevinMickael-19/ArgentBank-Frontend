@@ -24,13 +24,13 @@ function Header() {
       </NavLink>
       <div>
         {token ? (
-          <>
+          <div>
             <NavLink className="main-nav-item" to="/profile">
               <i className="fa fa-user-circle"></i>
               {user && user.userName}
             </NavLink>
             <button onClick={handleLogout}> Sign out </button>
-          </>
+          </div>
         ) : (
           <NavLink className="main-nav-item" to="/login">
             <i className="fa fa-user-circle"></i>
