@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Account from "../components/Account";
 import { getUserProfile } from "../store/authActions";
@@ -7,6 +7,8 @@ function Profile() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newUserName, setNewUserName] = useState("");
 
   useEffect(() => {
     dispatch(getUserProfile(token));
@@ -15,11 +17,26 @@ function Profile() {
   return (
     <main className=" main bg-dark">
       <div className="header">
-        <h1>
-          Welcome back <br />
-          {user && user.firstName} {user && user.lastName}
-        </h1>
-        <button className="edit-button">Edit Name</button>
+        {isEditing ? (
+          <>
+            <input
+              type="text"
+              value={newUserName}
+              onChange={(e) => setNewUserName(e.target.value)}
+            />
+            <button onClick={() => setIsEditing(false)}>Cancel</button>
+            <button>Save</button>
+          </>
+        ) : (
+          <>
+            <h1>
+              Welcome back <br />
+              {user && user.firstName} {user && user.lastName}
+            </h1>
+            <button className="edit-button" onClick={() => setIsEditing(true)}> Edit Name
+            </button>
+          </>
+        )}
       </div>
       <h2 className="sr-only">Accounts</h2>
 
