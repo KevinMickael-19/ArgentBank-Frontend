@@ -5,26 +5,36 @@ import { getUserProfile, updateUserName } from "../store/authActions";
 
 function Profile() {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.auth.token);
-  const user = useSelector((state) => state.auth.user);
+  const { token, user } = useSelector((state) => state.auth);
   const [isEditing, setIsEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
+  const [inputError, setInputError] = useState("");
 
-  const handleSave = async() => {
+  const startEditing = () => {
+    setNewUserName(user?.userName || "");
+    setIsEditing(true);
+  };
+
+  const handleSave = async () => {
+    if (!newUserName.trim()) {
+      setInputError("The username can't be empty");
+      return;
+    }
+    setInputError("");
     try {
-      await dispatch(updateUserName({userName:newUserName, token})).unwrap()
-      setIsEditing(false)
+      await dispatch(updateUserName({ userName: newUserName, token })).unwrap();
+      setIsEditing(false);
     } catch {
       //Gestion erreur Redux
     }
-  }
+  };
 
   useEffect(() => {
     dispatch(getUserProfile(token));
   }, [dispatch, token]);
 
   return (
-    <main className=" main bg-dark">
+    <main className="main bg-dark">
       <div className="header">
         {isEditing ? (
           <>
@@ -33,16 +43,26 @@ function Profile() {
               value={newUserName}
               onChange={(e) => setNewUserName(e.target.value)}
             />
-            <button onClick={() => setIsEditing(false)}>Cancel</button>
+            {inputError && <p>{inputError}</p>}
+            <button
+              onClick={() => {
+                setIsEditing(false);
+                setInputError("");
+              }}
+            >
+              Cancel
+            </button>
             <button onClick={handleSave}>Save</button>
           </>
         ) : (
           <>
             <h1>
               Welcome back <br />
-              {user && user.firstName} {user && user.lastName}
+              {user?.firstName} {user?.lastName}
             </h1>
-            <button className="edit-button" onClick={() => setIsEditing(true)}> Edit Name
+            <button className="edit-button" onClick={startEditing}>
+              {" "}
+              Edit Name
             </button>
           </>
         )}
