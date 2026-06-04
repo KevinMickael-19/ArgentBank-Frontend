@@ -290,6 +290,68 @@ body {
   color: #fff;
 }
 
+/* Edit user form */
+.edit-user-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.edit-user-content h1 {
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.edit-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.edit-input-wrapper label {
+  color: white;
+  width: 100px;
+  text-align: right;
+}
+
+.edit-input-wrapper input {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+  width: 40%;
+}
+
+.edit-input-wrapper input:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+.edit-buttons button {
+  padding: 8px 32px;
+  background-color: #00bc77;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.edit-buttons button:hover {
+  background-color: #009a62;
+}
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;

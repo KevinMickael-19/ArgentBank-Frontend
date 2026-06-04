@@ -37,23 +37,37 @@ function Profile() {
     <main className="main bg-dark">
       <div className="header">
         {isEditing ? (
-          <>
-            <input
-              type="text"
-              value={newUserName}
-              onChange={(e) => setNewUserName(e.target.value)}
-            />
+          <div className="edit-user-content">
+            <h1>Edit user info</h1>
+            <div className="edit-input-wrapper">
+              <label>User name:</label>
+              <input
+                type="text"
+                value={newUserName}
+                onChange={(e) => setNewUserName(e.target.value)}
+              />
+            </div>
+            <div className="edit-input-wrapper">
+              <label> First name</label>
+              <input type="text" value={user?.firstName || ""} disabled />
+            </div>
+            <div className="edit-input-wrapper">
+              <label> Last name</label>
+              <input type="text" value={user?.lastName || ""} disabled />
+            </div>
             {inputError && <p>{inputError}</p>}
-            <button
-              onClick={() => {
-                setIsEditing(false);
-                setInputError("");
-              }}
-            >
-              Cancel
-            </button>
-            <button onClick={handleSave}>Save</button>
-          </>
+            <div className="edit-buttons">
+              <button onClick={handleSave}>Save</button>
+              <button
+                onClick={() => {
+                  setIsEditing(false);
+                  setInputError("");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
         ) : (
           <>
             <h1>
