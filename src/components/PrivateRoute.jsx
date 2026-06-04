@@ -9,7 +9,6 @@ function PrivateRoute({ children }) {
   const [isValid, setIsValid] = useState(null);
 
   useEffect(() => {
-    console.log("useEffect lancée, token:", token);
     if (!token) return;
 
     const verify = async () => {
