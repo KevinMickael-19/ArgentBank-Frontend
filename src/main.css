@@ -52,26 +52,46 @@ body {
 }
 
 .main-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #00bc77
 }
 
 .main-nav a.router-link-exact-active {
   color: #42b983;
 }
 
+.main-nav-items {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .main-nav-item {
   text-decoration: none;
-  margin-right: 0.5rem;
+  color: #00bc77;
 }
 
 .main-nav-item i {
+  font-size: 2rem;
+  margin-left: 0.5rem;
   margin-right: 0.5rem;
 }
 
 
 .main-nav-item:hover {
   text-decoration: underline;
+}
+
+button.main-nav-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #00bc77;
+  font-size: 2rem;
+  font-family: inherit;
+  padding: 0;
 }
 
 .main-nav-logo {

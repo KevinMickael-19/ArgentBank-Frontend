@@ -19,17 +19,25 @@ function Header() {
           className="main-nav-logo-image"
           src={logo}
           alt="Argent Bank Logo"
+          width="200"
+          height="54"
         />
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div>
         {token ? (
-          <div>
+          <div className="main-nav-items">
             <NavLink className="main-nav-item" to="/profile">
-              <i className="fa fa-user-circle"></i>
               {user && user.userName}
+              <i className="fa fa-user-circle"></i>
             </NavLink>
-            <button onClick={handleLogout}> Sign out </button>
+            <button
+              className="main-nav-item"
+              aria-label="Sign out"
+              onClick={handleLogout}
+            >
+              <i className="fa fa-power-off"></i>
+            </button>
           </div>
         ) : (
           <NavLink className="main-nav-item" to="/login">
