@@ -24,7 +24,7 @@ function PrivateRoute({ children }) {
   }, [dispatch, token]);
 
   if (!token) return <Navigate to="/login" />;
-  if (isValid === null) return <div> Loadingt</div>;
+  if (isValid === null) return <div> Loading</div>;
   if (!isValid) return <Navigate to="/login" />;
   return children;
 }
