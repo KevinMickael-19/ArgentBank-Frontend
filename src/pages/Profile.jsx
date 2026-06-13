@@ -1,33 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Account from "../components/Account";
-import { getUserProfile, updateUserName } from "../store/authActions";
+import { getUserProfile } from "../store/authActions";
+import EditNameForm from "../components/EditNameForm";
 
 function Profile() {
   const dispatch = useDispatch();
   const { token, user } = useSelector((state) => state.auth);
   const [isEditing, setIsEditing] = useState(false);
-  const [newUserName, setNewUserName] = useState("");
-  const [inputError, setInputError] = useState("");
-
-  const startEditing = () => {
-    setNewUserName(user?.userName || "");
-    setIsEditing(true);
-  };
-
-  const handleSave = async () => {
-    if (!newUserName.trim()) {
-      setInputError("The username can't be empty");
-      return;
-    }
-    setInputError("");
-    try {
-      await dispatch(updateUserName({ userName: newUserName, token })).unwrap();
-      setIsEditing(false);
-    } catch {
-      //Gestion erreur Redux
-    }
-  };
 
   useEffect(() => {
     dispatch(getUserProfile(token));
@@ -37,44 +17,14 @@ function Profile() {
     <main className="main bg-dark">
       <div className="header">
         {isEditing ? (
-          <div className="edit-user-content">
-            <h1>Edit user info</h1>
-            <div className="edit-input-wrapper">
-              <label>User name:</label>
-              <input
-                type="text"
-                value={newUserName}
-                onChange={(e) => setNewUserName(e.target.value)}
-              />
-            </div>
-            <div className="edit-input-wrapper">
-              <label> First name</label>
-              <input type="text" value={user?.firstName || ""} disabled />
-            </div>
-            <div className="edit-input-wrapper">
-              <label> Last name</label>
-              <input type="text" value={user?.lastName || ""} disabled />
-            </div>
-            {inputError && <p>{inputError}</p>}
-            <div className="edit-buttons">
-              <button onClick={handleSave}>Save</button>
-              <button
-                onClick={() => {
-                  setIsEditing(false);
-                  setInputError("");
-                }}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
+       <EditNameForm onCancel={() => setIsEditing(false)} />
         ) : (
           <>
             <h1>
               Welcome back <br />
               {user?.firstName} {user?.lastName}
             </h1>
-            <button className="edit-button" onClick={startEditing}>
+            <button className="edit-button" onClick={()=>setIsEditing(true)}>
               {" "}
               Edit Name
             </button>
