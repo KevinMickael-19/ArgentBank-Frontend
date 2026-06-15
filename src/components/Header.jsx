@@ -28,7 +28,7 @@ function Header() {
         {token ? (
           <div className="main-nav-items">
             <NavLink className="main-nav-item" to="/profile">
-              {user && user.userName}
+              {user?.userName}
               <i className="fa fa-user-circle"></i>
             </NavLink>
             <button
