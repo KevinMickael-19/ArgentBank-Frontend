@@ -13,7 +13,7 @@ function PrivateRoute({ children }) {
 
     const verify = async () => {
       try {
-        await dispatch(getUserProfile(token)).unwrap();
+        await dispatch(getUserProfile()).unwrap();
         setIsValid(true);
       } catch {
         setIsValid(false);
@@ -24,7 +24,7 @@ function PrivateRoute({ children }) {
   }, [dispatch, token]);
 
   if (!token) return <Navigate to="/login" />;
-  if (isValid === null) return <div> Loading</div>;
+  if (isValid === null) return null;
   if (!isValid) return <Navigate to="/login" />;
   return children;
 }

@@ -4,7 +4,7 @@ import { updateUserName } from "../store/authActions"
 
 function EditNameForm({ onCancel }) {
   const dispatch = useDispatch()
-  const { token, user } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.auth)
   const [newUserName, setNewUserName] = useState(user?.userName || "")
   const [inputError, setInputError] = useState("")
 
@@ -15,7 +15,7 @@ function EditNameForm({ onCancel }) {
     }
     setInputError("")
     try {
-      await dispatch(updateUserName({ userName: newUserName, token })).unwrap()
+      await dispatch(updateUserName(newUserName)).unwrap()
       onCancel()
     } catch {
       // Redux gère l'erreur
